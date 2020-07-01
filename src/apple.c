@@ -6,12 +6,34 @@ int A[100000];
 
 
 int main(){
-  int i, lb, ub;
-  scanf("%d%d", &n, &k);
-  for(i = 0; i < n; i++){
-    scanf("%d", &A[i]);
-  }
-
-
-  return 0;
+    int i, lb, ub;
+    scanf("%d%d", &n, &k);
+    for(i = 0; i < n; i++){
+      scanf("%d", &A[i]);
+    }
+    
+    int max = 0;
+    
+    for(i = 0; i < n; i++){
+        if (max < A[i]){
+            max = A[i];
+        }
+    }
+    
+    lb = 0;
+    ub = max;
+    
+    while (ub - lb > 1) {
+        int mid = (lb + ub) / 2;
+        int a = 0;
+        for(i = 0; i < n; i++){
+            a += (A[i] + mid - 1) / mid;
+        }
+        
+        if(a > k) lb = mid;
+        else ub = mid;
+    }
+    
+    printf("%d\n", ub);
+    return 0;
 }
